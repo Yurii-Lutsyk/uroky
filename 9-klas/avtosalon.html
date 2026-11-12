@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Автосалон · 9 клас</title>
+<style>
+:root{
+  --bg:#f6f7f9; --card:#ffffff; --ink:#1b2430; --grey:#5d6b7a; --line:#dfe4ea;
+  --navy:#1f3b63; --green:#1f7a4d; --red:#b3261e; --amber:#9a6700; --code:#1c2733;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#13171c; --card:#1b2026; --ink:#e8edf2; --grey:#9fb0c0; --line:#2c343d;
+    --navy:#9dc0ef; --green:#5fd39a; --red:#ff8a80; --amber:#f0c36d;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#13171c; --card:#1b2026; --ink:#e8edf2; --grey:#9fb0c0; --line:#2c343d;
+  --navy:#9dc0ef; --green:#5fd39a; --red:#ff8a80; --amber:#f0c36d;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:17px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  padding:0 16px 64px;-webkit-text-size-adjust:100%}
+.wrap{max-width:720px;margin:0 auto}
+header{padding:22px 0 10px}
+h1{font-size:26px;line-height:1.2;margin:0 0 4px}
+.sub{color:var(--grey);font-size:15px;margin:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:16px;margin:14px 0}
+h2{font-size:20px;margin:26px 0 10px;color:var(--navy)}
+h3{font-size:17px;margin:0 0 8px}
+label.q{display:block;font-weight:600;margin-bottom:8px}
+.opt{display:block;padding:9px 10px;border:1px solid var(--line);border-radius:9px;
+  margin:6px 0;cursor:pointer}
+.opt input{margin-right:9px}
+.opt.ok{border-color:var(--green);background:color-mix(in srgb,var(--green) 12%,transparent)}
+.opt.no{border-color:var(--red);background:color-mix(in srgb,var(--red) 12%,transparent)}
+input[type=text],textarea{width:100%;font:15px/1.45 "SFMono-Regular",Menlo,Consolas,monospace;
+  color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:10px}
+input[type=text]{font-family:inherit;font-size:17px}
+textarea{min-height:92px;resize:vertical}
+button{font:600 16px/1 inherit;color:#fff;background:var(--navy);border:0;
+  border-radius:9px;padding:13px 18px;margin-top:10px;cursor:pointer;width:100%}
+button.ghost{background:transparent;color:var(--navy);border:1px solid var(--navy)}
+.note{font-size:14px;color:var(--grey);margin:8px 0 0}
+.verdict{margin-top:10px;font-weight:600}
+.verdict.ok{color:var(--green)} .verdict.no{color:var(--red)}
+.score{font-size:21px;font-weight:700;margin-top:12px}
+table{border-collapse:collapse;width:100%;margin-top:10px;font-size:15px}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left}
+th{background:color-mix(in srgb,var(--navy) 12%,transparent)}
+.scroll{overflow-x:auto}
+.spec{background:var(--code);color:#e6edf3;border-radius:9px;padding:12px;
+  font:14px/1.5 "SFMono-Regular",Menlo,Consolas,monospace;overflow-x:auto}
+.tag{display:inline-block;font-size:13px;font-weight:700;color:#fff;background:var(--amber);
+  border-radius:20px;padding:3px 11px;margin-bottom:8px}
+.tag.g{background:var(--green)}
+.big{border-left:4px solid var(--amber);padding-left:12px}
+footer{color:var(--grey);font-size:14px;margin-top:30px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Автосалон</h1>
+  <p class="sub">Інформатика, 9 клас · розділ 2 · Тріщик, с. 72–76</p>
+</header>
+
+<div class="card">
+  <label class="q" for="pib">Прізвище та ім'я</label>
+  <input type="text" id="pib" placeholder="напиши тут, щоб було видно на скриншоті" autocomplete="off">
+  <p class="note">Сторінка пам'ятає все, що ти написав. Якщо випадково закрив — відкрий знову, нічого не зникне.</p>
+</div>
+
+<h2>Частина 1 · дванадцять тестів</h2>
+<div class="card">
+  <p class="note" style="margin-top:0">Вибери одну відповідь у кожному питанні. Коли відповіси на всі — натисни «Перевірити».</p>
+  <div id="tests"></div>
+  <button id="check">Перевірити</button>
+  <div class="score" id="score"></div>
+</div>
+
+<h2>Частина 2 · створюємо базу «Автосалон»</h2>
+<div class="card big">
+  <p style="margin-top:0">У книжці цю базу роблять у програмі Microsoft Access. У нас її немає — зробимо тут, прямо на сторінці. Усе, що ти напишеш, виконується по-справжньому.</p>
+  <p class="note"><b>Команди пишеш сам.</b> Нижче тільки умова: які поля і які рядки має містити таблиця.</p>
+</div>
+
+<div class="card" id="t1">
+  <span class="tag">Крок 1</span>
+  <h3>Таблиця vyrobnyky</h3>
+  <div class="spec">поля:  nazva (text),  kraina (text)
+
+Skoda    Czechia
+Toyota   Japan</div>
+  <p class="note">Напиши <b>create table</b>, потім <b>insert into</b>, потім <b>select</b>. Три команди, кожна з крапкою з комою в кінці.</p>
+  <textarea data-step="1" placeholder="пиши команди тут"></textarea>
+  <button data-run="1">Виконати</button>
+  <div class="verdict"></div>
+  <div class="scroll"></div>
+</div>
+
+<div class="card" id="t2">
+  <span class="tag">Крок 2</span>
+  <h3>Таблиця modeli</h3>
+  <div class="spec">поля:  nazva (text),  vyrobnyk (text),  kc (integer)
+
+Octavia   Skoda     150
+Corolla   Toyota    132
+Yaris     Toyota     90</div>
+  <p class="note">Поле <b>vyrobnyk</b> — це зв'язок із першою таблицею. У книжці на с. 74 він намальований стрілкою. <b>kc</b> — кінські сили.</p>
+  <textarea data-step="2" placeholder="пиши команди тут"></textarea>
+  <button data-run="2">Виконати</button>
+  <div class="verdict"></div>
+  <div class="scroll"></div>
+</div>
+
+<div class="card" id="t3">
+  <span class="tag">Крок 3</span>
+  <h3>Таблиця avto</h3>
+  <div class="spec">поля:  vin (integer),  model (text),  rik (integer),  cina (integer)
+
+1   Octavia   2019   520000
+2   Corolla   2021   750000
+3   Yaris     2016   260000
+4   Octavia   2015   310000</div>
+  <p class="note">Числа пишуться без лапок, слова — в лапках. Octavia тут двічі: це два різні автомобілі однієї моделі.</p>
+  <textarea data-step="3" placeholder="пиши команди тут"></textarea>
+  <button data-run="3">Виконати</button>
+  <div class="verdict"></div>
+  <div class="scroll"></div>
+</div>
+
+<h2>Частина 3 · запити</h2>
+
+<div class="card" id="q1">
+  <span class="tag g">Запит 1</span>
+  <h3>Одна таблиця</h3>
+  <p style="margin-top:0">Покажи <b>модель і ціну</b> автомобілів, дешевших за 500000, від найдешевшого до найдорожчого.</p>
+  <p class="note">Потрібні три слова: select, where, order by.</p>
+  <textarea data-step="4" placeholder="пиши запит тут"></textarea>
+  <button data-run="4">Виконати</button>
+  <div class="verdict"></div>
+  <div class="scroll"></div>
+</div>
+
+<div class="card" id="q2">
+  <span class="tag g">Запит 2</span>
+  <h3>Три таблиці одразу</h3>
+  <p style="margin-top:0">Покажи <b>модель, ціну, потужність і країну виробника</b> — усі автомобілі. Ці дані лежать у трьох різних таблицях, і запит має їх поєднати.</p>
+  <div class="spec">select avto.model, avto.cina, modeli.kc, vyrobnyky.kraina
+from avto, modeli, vyrobnyky
+where avto.model = modeli.nazva
+  and modeli.vyrobnyk = vyrobnyky.nazva;</div>
+  <p class="note">Цей запит довгий, тому він тут готовий. Перепиши його й подивись на два останні рядки: <b>це і є стрілки зв'язків із книжки</b>, тільки текстом.</p>
+  <textarea data-step="5" placeholder="перепиши запит сюди"></textarea>
+  <button data-run="5">Виконати</button>
+  <div class="verdict"></div>
+  <div class="scroll"></div>
+</div>
+
+<div class="card">
+  <label class="q" for="why">Одним реченням: що робить запит 2 і навіщо в ньому два останні рядки?</label>
+  <textarea id="why" placeholder="своїми словами"></textarea>
+  <p class="note">Це питання вчитель поставить ще й вголос. Відповідь своїми словами — і є оцінка.</p>
+</div>
+
+<div class="card big">
+  <h3 style="margin-top:0">Останнє: надішли скриншоти</h3>
+  <p>Зроби скриншот результату тестів і скриншот обох запитів — і надішли в чат Meet. Перевір, щоб угорі було видно твоє прізвище.</p>
+  <button class="ghost" id="reset">Почати все спочатку</button>
+</div>
+
+<footer>Максимівський ліцей · урок 15 · 13 листопада 2026</footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+<script>
+const QUESTIONS = [
+ ["База даних — це:",["програма для малювання","упорядкований набір даних, пов'язаних між собою","папка з файлами на робочому столі"]],
+ ["Рядок таблиці бази даних називають:",["полем","записом","запитом"]],
+ ["Стовпець таблиці бази даних називають:",["полем","записом","звітом"]],
+ ["Ключове поле потрібне, щоб:",["зробити таблицю кольоровою","однозначно відрізнити один запис від усіх інших","приховати частину даних"]],
+ ["Яке поле найкраще підійде на роль ключового в таблиці «Учні»?",["Ім'я","Клас","Номер особової справи"]],
+ ["Сортування даних:",["змінює порядок записів, кількість лишається та сама","ховає записи, які не підходять під умову","видаляє зайві записи"]],
+ ["Фільтрація даних:",["змінює порядок записів","тимчасово ховає записи, які не підходять під умову","назавжди видаляє записи"]],
+ ["Звіт у базі даних — це:",["документ із даних таблиці, зручний для читання й друку","помилка в таблиці","резервна копія бази"]],
+ ["Як розшифровується SQL?",["Super Quick Language","Structured Query Language","System Quality Level"]],
+ ["Команда SELECT у запиті вказує:",["з якої таблиці брати дані","які поля показати в результаті","як упорядкувати результат"]],
+ ["Команда WHERE у запиті задає:",["умову відбору записів","назву таблиці","кількість рядків"]],
+ ["Щоб упорядкувати результат від найбільшого до найменшого, пишуть:",["ORDER BY Cina","ORDER BY Cina DESC","GROUP BY Cina"]]
+];
+const KEY = atob("MSwxLDAsMSwyLDAsMSwwLDEsMSwwLDE=").split(",").map(Number);
+
+const store = {
+  get(k,d){ try{ const v=localStorage.getItem("avtosalon:"+k); return v===null?d:JSON.parse(v);}catch(e){return d;} },
+  set(k,v){ try{ localStorage.setItem("avtosalon:"+k,JSON.stringify(v)); }catch(e){} },
+  clear(){ try{ Object.keys(localStorage).filter(k=>k.startsWith("avtosalon:")).forEach(k=>localStorage.removeItem(k)); }catch(e){} }
+};
+
+// --- тести ---
+const box = document.getElementById("tests");
+const saved = store.get("answers",{});
+QUESTIONS.forEach(([text,opts],i)=>{
+  const d=document.createElement("div"); d.style.margin="0 0 18px";
+  d.innerHTML='<label class="q">'+(i+1)+'. '+text+'</label>';
+  opts.forEach((o,j)=>{
+    const id="q"+i+"o"+j;
+    const l=document.createElement("label"); l.className="opt"; l.dataset.q=i; l.dataset.o=j;
+    l.innerHTML='<input type="radio" name="q'+i+'" value="'+j+'" id="'+id+'">'+"АБВ"[j]+") "+o;
+    if(saved[i]===j) l.querySelector("input").checked=true;
+    l.querySelector("input").addEventListener("change",()=>{
+      const a=store.get("answers",{}); a[i]=j; store.set("answers",a);
+    });
+    d.appendChild(l);
+  });
+  box.appendChild(d);
+});
+
+document.getElementById("check").addEventListener("click",()=>{
+  const a=store.get("answers",{}); let n=0;
+  document.querySelectorAll(".opt").forEach(l=>l.classList.remove("ok","no"));
+  QUESTIONS.forEach((_,i)=>{
+    const picked=a[i];
+    if(picked===undefined) return;
+    const el=document.querySelector('.opt[data-q="'+i+'"][data-o="'+picked+'"]');
+    if(picked===KEY[i]){ n++; el.classList.add("ok"); }
+    else{
+      el.classList.add("no");
+      document.querySelector('.opt[data-q="'+i+'"][data-o="'+KEY[i]+'"]').classList.add("ok");
+    }
+  });
+  const bal=(n*0.5).toFixed(1).replace(".",",");
+  document.getElementById("score").textContent="Правильних: "+n+" з 12  ·  "+bal+" бала з 6";
+});
+
+// --- SQL ---
+const EXPECT = {1:2,2:3,3:4,4:2,5:4};
+const HINT = {
+ 1:"Має вийти два рядки: Skoda і Toyota.",
+ 2:"Має вийти три рядки.",
+ 3:"Має вийти чотири рядки.",
+ 4:"Має вийти два рядки: Yaris і Octavia за 310000.",
+ 5:"Має вийти чотири рядки, і в кожному — країна."
+};
+let db=null;
+
+document.querySelectorAll("textarea[data-step]").forEach(t=>{
+  t.value = store.get("sql"+t.dataset.step,"");
+  t.addEventListener("input",()=>store.set("sql"+t.dataset.step,t.value));
+});
+const why=document.getElementById("why");
+why.value=store.get("why",""); why.addEventListener("input",()=>store.set("why",why.value));
+const pib=document.getElementById("pib");
+pib.value=store.get("pib",""); pib.addEventListener("input",()=>store.set("pib",pib.value));
+
+initSqlJs({locateFile:f=>"https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/"+f})
+ .then(SQL=>{ db=new SQL.Database(); })
+ .catch(()=>{
+   document.querySelectorAll("button[data-run]").forEach(b=>{
+     b.disabled=true; b.textContent="Редактор не завантажився";
+   });
+   alert("Не вдалося завантажити редактор. Відкрий sqlime.org — там усе те саме.");
+ });
+
+document.querySelectorAll("button[data-run]").forEach(b=>{
+  b.addEventListener("click",()=>{
+    const step=b.dataset.run;
+    const card=b.closest(".card");
+    const out=card.querySelector(".scroll");
+    const v=card.querySelector(".verdict");
+    const sql=card.querySelector("textarea").value;
+    out.innerHTML=""; v.className="verdict"; v.textContent="";
+    if(!db){ v.classList.add("no"); v.textContent="Редактор ще вантажиться, зачекай секунду."; return; }
+    if(!sql.trim()){ v.classList.add("no"); v.textContent="Поле порожнє."; return; }
+    let res;
+    try{ res=db.exec(sql); }
+    catch(e){
+      v.classList.add("no");
+      let m=String(e.message||e);
+      if(/[‘’“”]/.test(sql)) m+=" — схоже, телефон поставив «фігурні» лапки замість прямих.";
+      v.textContent="Помилка: "+m;
+      return;
+    }
+    const last=res[res.length-1];
+    if(!last){ v.textContent="Виконано, але нічого не показано. Додай у кінці select."; v.classList.add("no"); return; }
+    const t=document.createElement("table");
+    t.innerHTML="<tr>"+last.columns.map(c=>"<th>"+c+"</th>").join("")+"</tr>"+
+      last.values.map(r=>"<tr>"+r.map(x=>"<td>"+(x===null?"":x)+"</td>").join("")+"</tr>").join("");
+    out.appendChild(t);
+    const n=last.values.length, need=EXPECT[step];
+    if(n===need){ v.classList.add("ok"); v.textContent="✓ "+n+" рядки — правильно. Зроби скриншот."; }
+    else{ v.classList.add("no"); v.textContent="Вийшло "+n+", а треба "+need+". "+HINT[step]; }
+  });
+});
+
+document.getElementById("reset").addEventListener("click",()=>{
+  if(!confirm("Стерти всі відповіді й почати спочатку?")) return;
+  store.clear(); location.reload();
+});
+</script>
+</body>
+</html>
