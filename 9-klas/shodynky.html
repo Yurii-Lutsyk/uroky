@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Сходинки · 9 клас</title>
+<style>
+:root{
+  --bg:#f6f7f9; --card:#ffffff; --ink:#1b2430; --grey:#5d6b7a; --line:#dfe4ea;
+  --navy:#1f3b63; --green:#1f7a4d; --red:#b3261e; --amber:#9a6700;
+  --ax-x:#cc3322; --ax-y:#22883f; --ax-z:#2255cc;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#13171c; --card:#1b2026; --ink:#e8edf2; --grey:#9fb0c0; --line:#2c343d;
+    --navy:#9dc0ef; --green:#5fd39a; --red:#ff8a80; --amber:#f0c36d;
+    --ax-x:#ff7a6b; --ax-y:#5fd39a; --ax-z:#8ab4ff;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:17px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  padding:0 16px 72px;-webkit-text-size-adjust:100%}
+.wrap{max-width:720px;margin:0 auto}
+header{padding:22px 0 8px}
+h1{font-size:26px;line-height:1.2;margin:0 0 4px}
+.sub{color:var(--grey);font-size:15px;margin:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin:14px 0}
+h2{font-size:20px;margin:26px 0 10px;color:var(--navy)}
+h3{font-size:17px;margin:0 0 8px}
+label{display:block;font-weight:600;margin:10px 0 4px}
+input[type=text],input[type=number],textarea{width:100%;padding:10px;border:1px solid var(--line);
+  border-radius:9px;background:var(--bg);color:var(--ink);font-size:16px}
+textarea{min-height:76px;font-size:16px;line-height:1.45}
+button{font:600 16px/1 inherit;padding:12px 14px;border-radius:9px;border:1px solid var(--navy);
+  background:var(--navy);color:#fff;cursor:pointer;margin:6px 6px 0 0}
+button.ghost{background:transparent;color:var(--navy)}
+button[disabled]{opacity:.45;cursor:not-allowed}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.row>div{flex:1 1 140px}
+.note{color:var(--grey);font-size:15px}
+.ok{color:var(--green);font-weight:600}
+.bad{color:var(--red);font-weight:600}
+.axis{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:6px}
+.step-done{border-color:var(--green)}
+ol.log{margin:8px 0 0;padding-left:20px;font-size:15px;color:var(--grey)}
+ol.log li{margin:3px 0}
+/* 3D */
+#stage{height:300px;background:var(--bg);border:1px solid var(--line);border-radius:12px;
+  overflow:hidden;touch-action:none;perspective:900px;position:relative;margin-top:10px}
+#scene{position:absolute;left:50%;top:58%;transform-style:preserve-3d}
+.box{position:absolute;transform-style:preserve-3d}
+.face{position:absolute;background:#5b86c4;border:1px solid rgba(0,0,0,.35)}
+.f-top{background:#8fb3e8}.f-bot{background:#2f4a73}
+.f-l,.f-r{background:#4a74ad}.f-f{background:#6c97d6}.f-k{background:#3d6198}
+.ax{position:absolute;height:2px;transform-origin:0 50%}
+.hint{position:absolute;left:10px;bottom:8px;font-size:13px;color:var(--grey)}
+.opt{display:block;padding:9px 10px;border:1px solid var(--line);border-radius:9px;margin:6px 0;cursor:pointer}
+.opt input{margin-right:9px}
+.opt.good{border-color:var(--green);background:color-mix(in srgb,var(--green) 12%,transparent)}
+.opt.wrong{border-color:var(--red);background:color-mix(in srgb,var(--red) 12%,transparent)}
+.big{font-size:19px;font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Сходинки</h1>
+  <p class="sub">9 клас · Практична робота № 19, завдання 1 · с. 85–86</p>
+</header>
+
+<div class="card">
+  <label for="name">Твоє прізвище та ім'я</label>
+  <input id="name" type="text" placeholder="Напиши тут" autocomplete="off">
+  <p class="note" style="margin-top:10px">
+    Усе, що ти тут напишеш, зберігається в цьому телефоні. Якщо випадково
+    закриєш вкладку — відкрий сторінку знову, усе буде на місці.
+  </p>
+</div>
+
+<h2>Що ми робимо</h2>
+<div class="card">
+  <p style="margin-top:0">У книжці на с. 85–86 ці самі сходинки будують у SketchUp.
+  SketchUp вимагає акаунта, тому ми робимо те саме тут — у браузері телефона,
+  планшета або комп'ютера. <b>Команди називаються так само</b>, як у книжці.</p>
+  <p style="margin-bottom:0">Три дії, одна за одною: <b>Rectangle</b> → <b>Push/Pull</b> → <b>Move + Ctrl</b>.</p>
+</div>
+
+<h2>Спочатку — три осі</h2>
+<div class="card">
+  <p style="margin-top:0"><span class="axis" style="background:var(--ax-x)"></span>
+  <b>Червона X</b> — ліворуч-праворуч. Це <b>ширина</b>.</p>
+  <p><span class="axis" style="background:var(--ax-y)"></span>
+  <b>Зелена Y</b> — вперед-назад. Це <b>глибина</b>.</p>
+  <p style="margin-bottom:0"><span class="axis" style="background:var(--ax-z)"></span>
+  <b>Синя Z</b> — вгору-вниз. Це <b>висота</b>.</p>
+</div>
+
+<h2>Крок 1 · Rectangle — основа</h2>
+<div class="card" id="c1">
+  <p class="note" style="margin-top:0">У SketchUp ти вибираєш інструмент Rectangle і вводиш два числа
+  через кому. Тут — у два поля. Числа з книжки: 100 і 30.</p>
+  <div class="row">
+    <div><label for="w">Ширина по X, см</label><input id="w" type="number" value="100" min="10" max="300"></div>
+    <div><label for="d">Глибина по Y, см</label><input id="d" type="number" value="30" min="10" max="300"></div>
+  </div>
+  <button id="b1">Накреслити основу</button>
+</div>
+
+<h2>Крок 2 · Push/Pull — витягнути вгору</h2>
+<div class="card" id="c2">
+  <p class="note" style="margin-top:0">Push/Pull піднімає плоский прямокутник угору по синій осі Z
+  і робить із нього об'ємний ступінь. У книжці — 15 см.</p>
+  <label for="h">Висота ступеня по Z, см</label>
+  <input id="h" type="number" value="15" min="2" max="100">
+  <button id="b2" disabled>Витягнути вгору</button>
+</div>
+
+<h2>Крок 3 · Move + Ctrl — копії</h2>
+<div class="card" id="c3">
+  <p class="note" style="margin-top:0">Move з натиснутим Ctrl не переносить ступінь, а <b>копіює</b> його.
+  Кожна копія зсувається назад по зеленій осі Y і вгору по синій осі Z.</p>
+  <div class="row">
+    <div><label for="back">Зсув назад по Y, см</label><input id="back" type="number" value="30" min="5" max="100"></div>
+    <div><label for="n">Скільки ступенів усього</label><input id="n" type="number" value="4" min="1" max="6"></div>
+  </div>
+  <button id="b3" disabled>Зробити копії</button>
+  <button id="reset" class="ghost">Почати спочатку</button>
+</div>
+
+<h2>Твоя модель</h2>
+<div class="card">
+  <div id="stage">
+    <div id="scene"></div>
+    <div class="hint">Проведи пальцем по картинці, щоб покрутити модель</div>
+  </div>
+  <p id="facts" class="note" style="margin-bottom:0"></p>
+  <ol class="log" id="log"></ol>
+  <p class="big" style="margin-bottom:0">Коли сходинки готові — зроби скриншот і надішли в чат.</p>
+</div>
+
+<h2>Перевір себе — чотири запитання</h2>
+<div class="card">
+  <p class="note" style="margin-top:0">Відповідай, дивлячись на свою модель.</p>
+  <div id="quiz"></div>
+  <button id="check">Перевірити</button>
+  <p id="qres" class="note"></p>
+</div>
+
+<h2>Поясни одним реченням</h2>
+<div class="card">
+  <label for="why">Чому для копій треба зсув і назад, і вгору? Що буде, якщо зсувати тільки назад?</label>
+  <textarea id="why" placeholder="Своїми словами. Одне-два речення."></textarea>
+  <p class="note" style="margin-bottom:0">Це запитання оцінюється окремо. Відповідь має бути твоя,
+  а не з інтернету: ти дивишся на свою модель, її ні в кого більше немає.</p>
+</div>
+
+<h2>Якщо сторінка не працює</h2>
+<div class="card">
+  <p style="margin:0">Намалюй сходинки на аркуші в ізометрії: основа 100 × 30, ступінь 15 см заввишки,
+  кожен наступний на 30 см назад і на 15 см вище. Підпиши осі X, Y, Z і назви трьох команд.
+  Оцінка та сама: оцінюється робота, а не те, чим вона зроблена.</p>
+</div>
+
+</div>
+
+<script>
+(function(){
+  var K='shodynky:';
+  function save(k,v){try{localStorage.setItem(K+k,v)}catch(e){}}
+  function load(k){try{return localStorage.getItem(K+k)}catch(e){return null}}
+
+  // --- збереження текстових полів ---
+  ['name','why','w','d','h','back','n'].forEach(function(id){
+    var el=document.getElementById(id); if(!el) return;
+    var v=load(id); if(v!==null&&v!=='') el.value=v;
+    el.addEventListener('input',function(){save(id,el.value)});
+  });
+
+  var st={w:0,d:0,h:0,back:0,n:1,stage:0};
+  var sv=load('state'); if(sv){try{st=JSON.parse(sv)}catch(e){}}
+  function keep(){save('state',JSON.stringify(st))}
+
+  var scene=document.getElementById('scene'),
+      logEl=document.getElementById('log'),
+      facts=document.getElementById('facts');
+  var rx=-22, ry=28;
+
+  function num(id,def){var v=parseFloat(document.getElementById(id).value);return isFinite(v)?v:def}
+
+  function face(cls,w,h,tf){
+    var e=document.createElement('div');
+    e.className='face '+cls;
+    e.style.width=w+'px'; e.style.height=h+'px'; e.style.transform=tf;
+    return e;
+  }
+  function box(w,h,d,x,y,z){
+    var b=document.createElement('div'); b.className='box';
+    b.style.transform='translate3d('+x+'px,'+y+'px,'+z+'px)';
+    b.appendChild(face('f-f',w,h,'translate3d(0,0,'+(d/2)+'px)'));
+    b.appendChild(face('f-k',w,h,'translate3d(0,0,'+(-d/2)+'px) rotateY(180deg)'));
+    b.appendChild(face('f-l',d,h,'translate3d('+(-d/2)+'px,0,0) rotateY(-90deg)'));
+    b.appendChild(face('f-r',d,h,'translate3d('+(w-d/2)+'px,0,0) rotateY(90deg)'));
+    b.appendChild(face('f-top',w,d,'translate3d(0,'+(-d/2)+'px,0) rotateX(90deg) translate3d(0,'+(d/2-d/2)+'px,0)'));
+    b.appendChild(face('f-bot',w,d,'translate3d(0,'+(h-d/2)+'px,0) rotateX(90deg)'));
+    return b;
+  }
+
+  function draw(){
+    scene.innerHTML='';
+    scene.style.transform='rotateX('+rx+'deg) rotateY('+ry+'deg)';
+    if(st.stage===0){ facts.textContent='Поки що порожньо. Почни з кроку 1.'; return; }
+
+    var maxW=Math.max(st.w, st.back*(st.n-1)+st.d, 1);
+    var k=190/maxW; if(k>4) k=4;
+    var W=st.w*k, D=st.d*k, H=(st.stage>=2?st.h:2)*k, B=st.back*k;
+    var count=(st.stage>=3?st.n:1);
+
+    for(var i=0;i<count;i++){
+      var y=-(i+1)*H;          // вгору по Z
+      var z=-i*B;              // назад по Y
+      var x=-W/2;
+      scene.appendChild(box(W,H,D,x,y,z));
+    }
+
+    var total=(st.stage>=2? st.h*count : 0);
+    var deep=(st.stage>=3? st.d + st.back*(count-1) : st.d);
+    facts.innerHTML='Ступенів: <b>'+count+'</b> · загальна висота: <b>'+total+' см</b>'+
+      ' · уся конструкція займає <b>'+st.w+' × '+deep+' см</b> на підлозі.';
+  }
+
+  function addLog(txt){
+    var li=document.createElement('li'); li.textContent=txt; logEl.appendChild(li);
+    save('log',logEl.innerHTML);
+  }
+  var savedLog=load('log'); if(savedLog) logEl.innerHTML=savedLog;
+
+  document.getElementById('b1').onclick=function(){
+    st.w=num('w',100); st.d=num('d',30); st.stage=1; keep(); draw();
+    document.getElementById('b2').disabled=false;
+    document.getElementById('c1').classList.add('step-done');
+    addLog('Rectangle — основа '+st.w+' × '+st.d+' см (по осях X і Y).');
+  };
+  document.getElementById('b2').onclick=function(){
+    if(st.stage<1) return;
+    st.h=num('h',15); st.stage=2; keep(); draw();
+    document.getElementById('b3').disabled=false;
+    document.getElementById('c2').classList.add('step-done');
+    addLog('Push/Pull — витягнули вгору по осі Z на '+st.h+' см. Вийшов перший ступінь.');
+  };
+  document.getElementById('b3').onclick=function(){
+    if(st.stage<2) return;
+    st.back=num('back',30); st.n=Math.max(1,Math.min(6,num('n',4))); st.stage=3; keep(); draw();
+    document.getElementById('c3').classList.add('step-done');
+    addLog('Move + Ctrl — '+(st.n-1)+' копії: кожна на '+st.back+' см назад по Y і на '+st.h+' см угору по Z.');
+  };
+  document.getElementById('reset').onclick=function(){
+    st={w:0,d:0,h:0,back:0,n:1,stage:0}; keep();
+    logEl.innerHTML=''; save('log','');
+    document.getElementById('b2').disabled=true;
+    document.getElementById('b3').disabled=true;
+    ['c1','c2','c3'].forEach(function(id){document.getElementById(id).classList.remove('step-done')});
+    draw();
+  };
+
+  if(st.stage>=1){document.getElementById('c1').classList.add('step-done');document.getElementById('b2').disabled=false;}
+  if(st.stage>=2){document.getElementById('c2').classList.add('step-done');document.getElementById('b3').disabled=false;}
+  if(st.stage>=3){document.getElementById('c3').classList.add('step-done');}
+
+  // --- обертання пальцем ---
+  var stage=document.getElementById('stage'), drag=false, px=0, py=0;
+  function down(e){drag=true;var p=e.touches?e.touches[0]:e;px=p.clientX;py=p.clientY;}
+  function move(e){
+    if(!drag) return; e.preventDefault();
+    var p=e.touches?e.touches[0]:e;
+    ry+=(p.clientX-px)*0.5; rx-=(p.clientY-py)*0.4;
+    if(rx>80)rx=80; if(rx<-80)rx=-80;
+    px=p.clientX; py=p.clientY;
+    scene.style.transform='rotateX('+rx+'deg) rotateY('+ry+'deg)';
+  }
+  function up(){drag=false}
+  stage.addEventListener('mousedown',down); stage.addEventListener('touchstart',down,{passive:true});
+  window.addEventListener('mousemove',move); stage.addEventListener('touchmove',move,{passive:false});
+  window.addEventListener('mouseup',up); stage.addEventListener('touchend',up);
+
+  draw();
+
+  // --- запитання ---
+  var QS=[
+    {q:'Уздовж якої осі ступінь підіймається вгору?',
+     a:['Червона X','Зелена Y','Синя Z'], c:2,
+     why:'Синя Z — це висота. Push/Pull тягнув саме по ній.'},
+    {q:'Яка команда зробила з плоского прямокутника об\'ємний ступінь?',
+     a:['Rectangle','Push/Pull','Move + Ctrl'], c:1,
+     why:'Rectangle тільки креслить плоску фігуру. Об\'єм дає Push/Pull.'},
+    {q:'Чим Move + Ctrl відрізняється від простого Move?',
+     a:['Рухає швидше','Залишає копію, а оригінал лишається на місці','Повертає об\'єкт'], c:1,
+     why:'Саме через Ctrl ступенів стає більше: кожен рух залишає копію.'},
+    {q:'Якщо один ступінь 15 см, скільки заввишки буде чотири?',
+     a:['19 см','45 см','60 см'], c:2,
+     why:'15 × 4 = 60. Висоти складаються, бо кожна копія стає на попередню.'}
+  ];
+  var quiz=document.getElementById('quiz');
+  QS.forEach(function(it,i){
+    var h=document.createElement('h3'); h.textContent=(i+1)+'. '+it.q; quiz.appendChild(h);
+    it.a.forEach(function(txt,j){
+      var l=document.createElement('label'); l.className='opt';
+      l.innerHTML='<input type="radio" name="q'+i+'" value="'+j+'">'+txt;
+      quiz.appendChild(l);
+    });
+    var p=document.createElement('p'); p.className='note'; p.id='why'+i; p.style.display='none';
+    p.textContent=it.why; quiz.appendChild(p);
+  });
+  var sa=load('answers');
+  if(sa){try{JSON.parse(sa).forEach(function(v,i){
+    if(v===null) return;
+    var el=quiz.querySelector('input[name=q'+i+'][value="'+v+'"]'); if(el) el.checked=true;
+  })}catch(e){}}
+  quiz.addEventListener('change',function(){
+    var out=QS.map(function(_,i){
+      var el=quiz.querySelector('input[name=q'+i+']:checked'); return el?+el.value:null;});
+    save('answers',JSON.stringify(out));
+  });
+  document.getElementById('check').onclick=function(){
+    var ok=0;
+    QS.forEach(function(it,i){
+      var el=quiz.querySelector('input[name=q'+i+']:checked');
+      document.getElementById('why'+i).style.display='block';
+      quiz.querySelectorAll('input[name=q'+i+']').forEach(function(inp){
+        var lab=inp.parentNode; lab.classList.remove('good','wrong');
+        if(+inp.value===it.c) lab.classList.add('good');
+        else if(inp.checked) lab.classList.add('wrong');
+      });
+      if(el && +el.value===it.c) ok++;
+    });
+    var r=document.getElementById('qres');
+    r.innerHTML='Правильних: <b>'+ok+' з 4</b>. '+(ok===4?'Можна надсилати скриншот.':'Подивись пояснення під запитаннями і спробуй ще раз.');
+  };
+})();
+</script>
+</body>
+</html>
