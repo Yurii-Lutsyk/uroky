@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>3D-моделювання · 9 клас</title>
+<style>
+:root{
+  --bg:#f6f7f9; --card:#ffffff; --ink:#1b2430; --grey:#5d6b7a; --line:#dfe4ea;
+  --navy:#1f3b63; --green:#1f7a4d; --red:#b3261e; --amber:#9a6700; --code:#1c2733;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#13171c; --card:#1b2026; --ink:#e8edf2; --grey:#9fb0c0; --line:#2c343d;
+    --navy:#9dc0ef; --green:#5fd39a; --red:#ff8a80; --amber:#f0c36d;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#13171c; --card:#1b2026; --ink:#e8edf2; --grey:#9fb0c0; --line:#2c343d;
+  --navy:#9dc0ef; --green:#5fd39a; --red:#ff8a80; --amber:#f0c36d;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:17px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  padding:0 16px 64px;-webkit-text-size-adjust:100%}
+.wrap{max-width:720px;margin:0 auto}
+header{padding:22px 0 10px}
+h1{font-size:26px;line-height:1.2;margin:0 0 4px}
+.sub{color:var(--grey);font-size:15px;margin:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:16px;margin:14px 0}
+h2{font-size:20px;margin:26px 0 10px;color:var(--navy)}
+h3{font-size:17px;margin:0 0 8px}
+label.q{display:block;font-weight:600;margin-bottom:8px}
+.opt{display:block;padding:9px 10px;border:1px solid var(--line);border-radius:9px;
+  margin:6px 0;cursor:pointer}
+.opt input{margin-right:9px}
+.opt.ok{border-color:var(--green);background:color-mix(in srgb,var(--green) 12%,transparent)}
+.opt.no{border-color:var(--red);background:color-mix(in srgb,var(--red) 12%,transparent)}
+input[type=text],textarea{width:100%;font:15px/1.45 "SFMono-Regular",Menlo,Consolas,monospace;
+  color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:10px}
+input[type=text]{font-family:inherit;font-size:17px}
+textarea{min-height:92px;resize:vertical}
+button{font:600 16px/1 inherit;color:#fff;background:var(--navy);border:0;
+  border-radius:9px;padding:13px 18px;margin-top:10px;cursor:pointer;width:100%}
+button.ghost{background:transparent;color:var(--navy);border:1px solid var(--navy)}
+.note{font-size:14px;color:var(--grey);margin:8px 0 0}
+.verdict{margin-top:10px;font-weight:600}
+.verdict.ok{color:var(--green)} .verdict.no{color:var(--red)}
+.score{font-size:21px;font-weight:700;margin-top:12px}
+table{border-collapse:collapse;width:100%;margin-top:10px;font-size:15px}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left}
+th{background:color-mix(in srgb,var(--navy) 12%,transparent)}
+.scroll{overflow-x:auto}
+.spec{background:var(--code);color:#e6edf3;border-radius:9px;padding:12px;
+  font:14px/1.5 "SFMono-Regular",Menlo,Consolas,monospace;overflow-x:auto}
+.tag{display:inline-block;font-size:13px;font-weight:700;color:#fff;background:var(--amber);
+  border-radius:20px;padding:3px 11px;margin-bottom:8px}
+.tag.g{background:var(--green)}
+.big{border-left:4px solid var(--amber);padding-left:12px}
+footer{color:var(--grey);font-size:14px;margin-top:30px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>3D-моделювання</h1>
+  <p class="sub">Інформатика, 9 клас · Теми 20–21 · Тріщик, с. 89–98</p>
+</header>
+
+<div class="card">
+  <label class="q" for="pib">Прізвище та ім'я</label>
+  <input type="text" id="pib" placeholder="напиши тут, щоб було видно на скриншоті" autocomplete="off">
+  <p class="note">Сторінка пам'ятає все, що ти написав. Якщо випадково закрив — відкрий знову, нічого не зникне. Усе це працює з телефона.</p>
+</div>
+
+<h2>Коротко: що треба знати</h2>
+<div class="card">
+  <p style="margin-top:0"><b>Модель</b> — це спосіб перевірити ідею, не роблячи справжню річ. Спершу <b>гіпотеза</b> («якщо зробити полицю на 10 см нижче, діставати буде зручніше»), потім <b>прогноз</b>, і аж тоді — перевірка на моделі.</p>
+  <p><b>Будь-яка 3D-модель починається з плоскої фігури.</b> Малюєш прямокутник інструментом <b>Rectangle</b>, тягнеш його вгору інструментом <b>Push/Pull</b> — виходить коробка. Усе інше — повторення цих двох дій.</p>
+  <p><b>Рухаєш і копіюєш</b> інструментом <b>Move</b>. Копія виходить, якщо тягнути з натиснутим <b>Ctrl</b>. Але перед цим об'єкт треба <b>виділити повністю</b> — інакше поїде одна грань, і замість коробки лишиться плоский прямокутник.</p>
+  <p><b>Група</b> — це кілька об'єктів, зібраних в один блок: згрупував ніжку з чотирьох граней — і рухаєш її одним рухом, а не чотирма.</p>
+  <p><b>Компонент</b> — це розумна група. Якщо п'ять полиць у стелажі зроблені компонентом, то досить змінити товщину <b>в одній</b> — і всі п'ять зміняться самі. У групах довелося б робити це п'ять разів.</p>
+  <p class="note">Саме заради цього речення й існує вся тема. Компонент економить не клацання, а години.</p>
+</div>
+
+<h2>Частина 1 · дванадцять тестів</h2>
+<div class="card">
+  <p class="note" style="margin-top:0">Вибери одну відповідь у кожному питанні. Коли відповіси на всі — натисни «Перевірити». Сторінка покаже бал сама.</p>
+  <div id="tests"></div>
+  <button id="check">Перевірити</button>
+  <div class="score" id="score"></div>
+</div>
+
+<h2>Частина 2 · порахуй</h2>
+<div class="card big">
+  <p style="margin-top:0">У стелажі <b>шість однакових полиць</b> і <b>чотири однакові ніжки</b>. Треба змінити товщину полиці й ширину ніжки.</p>
+  <p>Скільки разів доведеться це робити, якщо всі деталі — <b>звичайні групи</b>? А якщо <b>компоненти</b>?</p>
+  <label class="q" for="a1">Групи — скільки разів</label>
+  <input type="text" id="a1" placeholder="одне число" autocomplete="off">
+  <label class="q" for="a2" style="margin-top:12px">Компоненти — скільки разів</label>
+  <input type="text" id="a2" placeholder="одне число" autocomplete="off">
+  <button id="checkCount">Перевірити</button>
+  <div class="verdict" id="vCount"></div>
+</div>
+
+<h2>Частина 3 · подумай і напиши</h2>
+<div class="card">
+  <p style="margin-top:0">Знайди вдома <b>три речі, зроблені з однакових повторюваних елементів</b> — наприклад сходи, батарея, паркан, клавіатура.</p>
+  <p>Напиши, що в кожній із них ти зробив би <b>компонентом</b>, а що лишив би звичайною групою.</p>
+  <textarea id="why" placeholder="три речення, по одному на кожну річ"></textarea>
+  <p class="note">Правильної відповіді тут немає. Приймається будь-яка, у якій видно причину.</p>
+</div>
+
+<div class="card">
+  <p style="margin-top:0"><b>Як здати.</b> Зроби скриншот цієї сторінки — так, щоб було видно твоє прізвище, бал за тести й написане. Надішли скриншот учителю.</p>
+  <button class="ghost" id="reset">Очистити все й почати спочатку</button>
+</div>
+
+<footer>Максимівський ліцей · сторінка працює без інтернету після першого відкриття</footer>
+</div>
+
+<script>
+const QUESTIONS = [
+ ["Скільки вимірів має 3D-модель?",["два: довжина й ширина","три: довжина, ширина й висота","одне: тільки об'єм"]],
+ ["Інструмент Rectangle (Прямокутник) малює:",["плоску фігуру","одразу коробку","лінію"]],
+ ["Щоб із плоского прямокутника зробити об'ємну коробку, беруть:",["Move","Push/Pull","Orbit"]],
+ ["Інструмент Orbit потрібен, щоб:",["обертати камеру навколо моделі","обертати саму модель","збільшити масштаб"]],
+ ["Інструмент Tape Measure (Рулетка) служить, щоб:",["пересунути об'єкт","виміряти відстань","змінити колір"]],
+ ["Щоб зробити копію об'єкта, тягнуть Move і тримають:",["Shift","Ctrl","Alt"]],
+ ["Якщо перед копіюванням не виділити об'єкт повністю, скопіюється:",["уся коробка","тільки одна грань","нічого"]],
+ ["Група — це:",["кілька об'єктів, об'єднаних в один блок","копія моделі","колір поверхні"]],
+ ["Компонент відрізняється від групи тим, що:",["його не можна пересунути","зміна в одній копії змінює всі копії одразу","він завжди червоний"]],
+ ["У стелажі п'ять однакових полиць. Якщо вони компоненти й треба змінити товщину, скільки разів це робимо?",["п'ять разів","один раз","жодного"]],
+ ["Коли компонент НЕ потрібен:",["коли елемент у моделі один і копій не буде","коли елементів багато й вони однакові","коли модель велика"]],
+ ["Модель у SketchUp будують відносно трьох осей. Це осі:",["X, Y і Z","A, B і C","1, 2 і 3"]]
+];
+const KEY = atob("MSwwLDEsMCwxLDEsMSwwLDEsMSwwLDA=").split(",").map(Number);
+
+const store = {
+  get(k,d){ try{ const v=localStorage.getItem("model3d:"+k); return v===null?d:JSON.parse(v);}catch(e){return d;} },
+  set(k,v){ try{ localStorage.setItem("model3d:"+k,JSON.stringify(v)); }catch(e){} },
+  clear(){ try{ Object.keys(localStorage).filter(k=>k.startsWith("model3d:")).forEach(k=>localStorage.removeItem(k)); }catch(e){} }
+};
+
+const box = document.getElementById("tests");
+const saved = store.get("answers",{});
+QUESTIONS.forEach(([text,opts],i)=>{
+  const d=document.createElement("div"); d.style.margin="0 0 18px";
+  d.innerHTML='<label class="q">'+(i+1)+'. '+text+'</label>';
+  opts.forEach((o,j)=>{
+    const l=document.createElement("label"); l.className="opt"; l.dataset.q=i; l.dataset.o=j;
+    l.innerHTML='<input type="radio" name="q'+i+'" value="'+j+'">'+"АБВ"[j]+") "+o;
+    if(saved[i]===j) l.querySelector("input").checked=true;
+    l.querySelector("input").addEventListener("change",()=>{
+      const a=store.get("answers",{}); a[i]=j; store.set("answers",a);
+    });
+    d.appendChild(l);
+  });
+  box.appendChild(d);
+});
+
+document.getElementById("check").addEventListener("click",()=>{
+  const a=store.get("answers",{}); let n=0;
+  document.querySelectorAll(".opt").forEach(l=>l.classList.remove("ok","no"));
+  QUESTIONS.forEach((_,i)=>{
+    const picked=a[i];
+    if(picked===undefined) return;
+    const el=document.querySelector('.opt[data-q="'+i+'"][data-o="'+picked+'"]');
+    if(picked===KEY[i]){ n++; el.classList.add("ok"); }
+    else{
+      el.classList.add("no");
+      document.querySelector('.opt[data-q="'+i+'"][data-o="'+KEY[i]+'"]').classList.add("ok");
+    }
+  });
+  const miss=QUESTIONS.length-Object.keys(a).length;
+  document.getElementById("score").textContent="Правильних: "+n+" з 12"+(miss>0?"  ·  без відповіді: "+miss:"");
+});
+
+const a1=document.getElementById("a1"), a2=document.getElementById("a2");
+a1.value=store.get("a1",""); a2.value=store.get("a2","");
+a1.addEventListener("input",()=>store.set("a1",a1.value));
+a2.addEventListener("input",()=>store.set("a2",a2.value));
+document.getElementById("checkCount").addEventListener("click",()=>{
+  const n1=parseInt(a1.value,10), n2=parseInt(a2.value,10);
+  const v=document.getElementById("vCount");
+  if(n1===10 && n2===2){
+    v.className="verdict ok";
+    v.textContent="Так. Групами — 10 разів (6 полиць + 4 ніжки). Компонентами — 2 рази: одна полиця й одна ніжка.";
+  } else {
+    v.className="verdict no";
+    v.textContent="Ще ні. Порахуй окремо полиці й окремо ніжки, а потім подумай, скільки з них треба змінити, якщо вони компоненти.";
+  }
+});
+
+const why=document.getElementById("why");
+why.value=store.get("why",""); why.addEventListener("input",()=>store.set("why",why.value));
+const pib=document.getElementById("pib");
+pib.value=store.get("pib",""); pib.addEventListener("input",()=>store.set("pib",pib.value));
+
+document.getElementById("reset").addEventListener("click",()=>{
+  if(confirm("Очистити все, що ти написав на цій сторінці?")){ store.clear(); location.reload(); }
+});
+</script>
+</body>
+</html>
