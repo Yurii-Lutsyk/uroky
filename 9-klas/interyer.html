@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Інтер’єр · 9 клас</title>
+<style>
+:root{
+  --bg:#f6f7f9; --card:#ffffff; --ink:#1b2430; --grey:#5d6b7a; --line:#dfe4ea;
+  --navy:#1f3b63; --green:#1f7a4d; --red:#b3261e; --amber:#9a6700; --code:#1c2733;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#13171c; --card:#1b2026; --ink:#e8edf2; --grey:#9fb0c0; --line:#2c343d;
+    --navy:#9dc0ef; --green:#5fd39a; --red:#ff8a80; --amber:#f0c36d;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#13171c; --card:#1b2026; --ink:#e8edf2; --grey:#9fb0c0; --line:#2c343d;
+  --navy:#9dc0ef; --green:#5fd39a; --red:#ff8a80; --amber:#f0c36d;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:17px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  padding:0 16px 64px;-webkit-text-size-adjust:100%}
+.wrap{max-width:720px;margin:0 auto}
+header{padding:22px 0 10px}
+h1{font-size:26px;line-height:1.2;margin:0 0 4px}
+.sub{color:var(--grey);font-size:15px;margin:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:16px;margin:14px 0}
+h2{font-size:20px;margin:26px 0 10px;color:var(--navy)}
+h3{font-size:17px;margin:0 0 8px}
+label.q{display:block;font-weight:600;margin-bottom:8px}
+.opt{display:block;padding:9px 10px;border:1px solid var(--line);border-radius:9px;
+  margin:6px 0;cursor:pointer}
+.opt input{margin-right:9px}
+.opt.ok{border-color:var(--green);background:color-mix(in srgb,var(--green) 12%,transparent)}
+.opt.no{border-color:var(--red);background:color-mix(in srgb,var(--red) 12%,transparent)}
+input[type=text],textarea{width:100%;font:15px/1.45 "SFMono-Regular",Menlo,Consolas,monospace;
+  color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:10px}
+input[type=text]{font-family:inherit;font-size:17px}
+textarea{min-height:92px;resize:vertical}
+button{font:600 16px/1 inherit;color:#fff;background:var(--navy);border:0;
+  border-radius:9px;padding:13px 18px;margin-top:10px;cursor:pointer;width:100%}
+button.ghost{background:transparent;color:var(--navy);border:1px solid var(--navy)}
+.note{font-size:14px;color:var(--grey);margin:8px 0 0}
+.verdict{margin-top:10px;font-weight:600}
+.verdict.ok{color:var(--green)} .verdict.no{color:var(--red)}
+.score{font-size:21px;font-weight:700;margin-top:12px}
+table{border-collapse:collapse;width:100%;margin-top:10px;font-size:15px}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left}
+th{background:color-mix(in srgb,var(--navy) 12%,transparent)}
+.scroll{overflow-x:auto}
+.spec{background:var(--code);color:#e6edf3;border-radius:9px;padding:12px;
+  font:14px/1.5 "SFMono-Regular",Menlo,Consolas,monospace;overflow-x:auto}
+.tag{display:inline-block;font-size:13px;font-weight:700;color:#fff;background:var(--amber);
+  border-radius:20px;padding:3px 11px;margin-bottom:8px}
+.tag.g{background:var(--green)}
+.big{border-left:4px solid var(--amber);padding-left:12px}
+footer{color:var(--grey);font-size:14px;margin-top:30px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Інтер’єр кімнати</h1>
+  <p class="sub">Інформатика, 9 клас · Тема 22 · Тріщик, с. 99–103</p>
+</header>
+
+<div class="card">
+  <label class="q" for="pib">Прізвище та ім'я</label>
+  <input type="text" id="pib" placeholder="напиши тут, щоб було видно на скриншоті" autocomplete="off">
+  <p class="note">Сторінка пам'ятає все, що ти написав. Якщо випадково закрив — відкрий знову, нічого не зникне. Усе це працює з телефона.</p>
+</div>
+
+<h2>Коротко: що треба знати</h2>
+<div class="card">
+  <p style="margin-top:0"><b>Інтер'єр</b> — це внутрішній простір кімнати з усім, що в ньому є: стінами, підлогою, меблями, світлом. Модель інтер'єру будують <b>не для краси</b>, а щоб перевірити, чи в цій кімнаті можна жити: чи відчиняться двері, чи пройде людина між столом і ліжком.</p>
+  <p><b>Екструдування</b> — довге слово, за яким ховається наш <b>Push/Pull</b>. Він працює у два боки. <b>Pull</b> тягне назовні: з плоскої фігури виходить обʼємна. <b>Push</b> тисне всередину: виходить <b>отвір</b>. Саме так роблять вікно — його не малюють, його вирізають.</p>
+  <p><b>Offset</b> — новий інструмент. Він робить <b>другий контур на однаковій відстані від першого</b>. Намалював прямокутник кімнати, зробив Offset на 200 мм усередину — і стіни готові. Без нього довелося б ставити чотири окремі прямокутники рівно.</p>
+  <p><b>3D Warehouse</b> — безкоштовна бібліотека готових 3D-моделей. Диван, ліжко, лампу малювати не треба. Значок трьох кубиків на верхній панелі, пошук <b>англійською</b>: <code>sofa</code>, <code>bed</code>, <code>lamp</code>, <code>desk</code>. Моделі звідти приходять <b>компонентами</b>.</p>
+  <p><b>Рендеринг</b> — перетворення моделі на фотореалістичне зображення. Програма рахує, як світло відбивається від кожної поверхні, тому це довго. Модель — це форма, рендер — це вже майже фото.</p>
+  <p class="note">Числа, які варто знати напам'ять: двері 800 мм, вікно 1200 мм, стіни 200 мм, висота кімнати 2500 мм, прохід між меблями — не менше 600 мм.</p>
+</div>
+
+<h2>Частина 1 · дванадцять тестів</h2>
+<div class="card">
+  <p class="note" style="margin-top:0">Вибери одну відповідь у кожному питанні. Коли відповіси на всі — натисни «Перевірити». Сторінка покаже бал сама.</p>
+  <div id="tests"></div>
+  <button id="check">Перевірити</button>
+  <div class="score" id="score"></div>
+</div>
+
+<h2>Частина 2 · порахуй свою кімнату</h2>
+<div class="card big">
+  <p style="margin-top:0">Кімната <b>4000 мм × 3000 мм</b>. У ній стоять ліжко 2000 × 900 і стіл 1200 × 600.</p>
+  <p>Скільки <b>квадратних метрів</b> площа всієї кімнати? А скільки займають ці дві речі разом?</p>
+  <label class="q" for="a1">Площа кімнати, м²</label>
+  <input type="text" id="a1" placeholder="одне число" autocomplete="off">
+  <label class="q" for="a2" style="margin-top:12px">Площа ліжка і стола разом, м²</label>
+  <input type="text" id="a2" placeholder="одне число, можна з комою" autocomplete="off">
+  <button id="checkCount">Перевірити</button>
+  <div class="verdict" id="vCount"></div>
+  <p class="note">Підказка: 1000 мм = 1 м. Спершу переведи розміри в метри, і тільки потім множ.</p>
+</div>
+
+<h2>Частина 3 · подумай і напиши</h2>
+<div class="card">
+  <p style="margin-top:0">Подивись на свою кімнату вдома. Знайди в ній <b>одне місце, де незручно</b> — двері, які впираються в щось, вузький прохід, шафа, яку важко відчинити.</p>
+  <p>Напиши двома реченнями: що саме незручно і як би ти це переставив.</p>
+  <textarea id="why" placeholder="два речення"></textarea>
+  <p class="note">Правильної відповіді тут немає. Приймається будь-яка, у якій видно причину.</p>
+</div>
+
+<div class="card">
+  <p style="margin-top:0"><b>Як здати.</b> Зроби скриншот цієї сторінки — так, щоб було видно твоє прізвище, бал за тести й написане. Надішли скриншот учителю.</p>
+  <button class="ghost" id="reset">Очистити все й почати спочатку</button>
+</div>
+
+<footer>Максимівський ліцей · сторінка працює без інтернету після першого відкриття</footer>
+</div>
+
+<script>
+const QUESTIONS = [
+ ["Інтер'єр — це:",["зовнішній вигляд будинку","внутрішній простір приміщення з усім, що в ньому є","план ділянки"]],
+ ["Модель кімнати будують насамперед для того, щоб:",["вона гарно виглядала на екрані","перевірити, чи зручно в ній буде жити","показати вчителю"]],
+ ["Інструмент Push/Pull, якщо тягнути НАЗОВНІ:",["робить отвір","піднімає площину й робить обʼєм","повертає камеру"]],
+ ["Щоб зробити у стіні отвір під вікно, треба:",["намалювати вікно олівцем","намалювати прямокутник і продавити його Push всередину","розтягнути стіну"]],
+ ["Інструмент Offset робить:",["другий контур на однаковій відстані від першого","копію всього обʼєкта","тінь"]],
+ ["Стіни кімнати найпростіше намалювати так:",["чотири окремі прямокутники","прямокутник і Offset усередину","коло й Push/Pull"]],
+ ["3D Warehouse — це:",["бібліотека готових 3D-моделей","програма для рендерингу","інструмент вимірювання"]],
+ ["У пошуку 3D Warehouse запит треба писати:",["українською","англійською","будь-якою, він перекладає"]],
+ ["Модель із 3D Warehouse приїхала завелика. Що беремо?",["Move","Scale","Rotate"]],
+ ["Рендеринг — це:",["побудова моделі з прямокутників","перетворення моделі у фотореалістичне зображення","збереження файлу"]],
+ ["Стандартна ширина дверей у кімнату — приблизно:",["400 мм","800 мм","1600 мм"]],
+ ["Прохід між меблями роблять не менше ніж:",["200 мм","600 мм","2000 мм"]]
+];
+const KEY = atob("MSwxLDAsMSwwLDEsMSwwLDEsMCwxLDE=").split(",").map(Number);
+
+const store = {
+  get(k,d){ try{ const v=localStorage.getItem("interyer:"+k); return v===null?d:JSON.parse(v);}catch(e){return d;} },
+  set(k,v){ try{ localStorage.setItem("interyer:"+k,JSON.stringify(v)); }catch(e){} },
+  clear(){ try{ Object.keys(localStorage).filter(k=>k.startsWith("interyer:")).forEach(k=>localStorage.removeItem(k)); }catch(e){} }
+};
+
+const box = document.getElementById("tests");
+const saved = store.get("answers",{});
+QUESTIONS.forEach(([text,opts],i)=>{
+  const d=document.createElement("div"); d.style.margin="0 0 18px";
+  d.innerHTML='<label class="q">'+(i+1)+'. '+text+'</label>';
+  opts.forEach((o,j)=>{
+    const l=document.createElement("label"); l.className="opt"; l.dataset.q=i; l.dataset.o=j;
+    l.innerHTML='<input type="radio" name="q'+i+'" value="'+j+'">'+"АБВ"[j]+") "+o;
+    if(saved[i]===j) l.querySelector("input").checked=true;
+    l.querySelector("input").addEventListener("change",()=>{
+      const a=store.get("answers",{}); a[i]=j; store.set("answers",a);
+    });
+    d.appendChild(l);
+  });
+  box.appendChild(d);
+});
+
+document.getElementById("check").addEventListener("click",()=>{
+  const a=store.get("answers",{}); let n=0;
+  document.querySelectorAll(".opt").forEach(l=>l.classList.remove("ok","no"));
+  QUESTIONS.forEach((_,i)=>{
+    const picked=a[i];
+    if(picked===undefined) return;
+    const el=document.querySelector('.opt[data-q="'+i+'"][data-o="'+picked+'"]');
+    if(picked===KEY[i]){ n++; el.classList.add("ok"); }
+    else{
+      el.classList.add("no");
+      document.querySelector('.opt[data-q="'+i+'"][data-o="'+KEY[i]+'"]').classList.add("ok");
+    }
+  });
+  const miss=QUESTIONS.length-Object.keys(a).length;
+  document.getElementById("score").textContent="Правильних: "+n+" з 12"+(miss>0?"  ·  без відповіді: "+miss:"");
+});
+
+const a1=document.getElementById("a1"), a2=document.getElementById("a2");
+a1.value=store.get("a1",""); a2.value=store.get("a2","");
+a1.addEventListener("input",()=>store.set("a1",a1.value));
+a2.addEventListener("input",()=>store.set("a2",a2.value));
+const num=s=>parseFloat(String(s).replace(",","."));
+document.getElementById("checkCount").addEventListener("click",()=>{
+  const n1=num(a1.value), n2=num(a2.value);
+  const v=document.getElementById("vCount");
+  if(Math.abs(n1-12)<0.05 && Math.abs(n2-2.52)<0.06){
+    v.className="verdict ok";
+    v.textContent="Так. Кімната 4 × 3 = 12 м². Ліжко 2 × 0,9 = 1,8 м², стіл 1,2 × 0,6 = 0,72 м². Разом 2,52 м² — приблизно пʼята частина підлоги.";
+  } else {
+    v.className="verdict no";
+    v.textContent="Ще ні. Спершу переведи міліметри в метри: 4000 мм це 4 м, 900 мм це 0,9 м. І тільки потім множ довжину на ширину.";
+  }
+});
+
+const why=document.getElementById("why");
+why.value=store.get("why",""); why.addEventListener("input",()=>store.set("why",why.value));
+const pib=document.getElementById("pib");
+pib.value=store.get("pib",""); pib.addEventListener("input",()=>store.set("pib",pib.value));
+
+document.getElementById("reset").addEventListener("click",()=>{
+  if(confirm("Очистити все, що ти написав на цій сторінці?")){ store.clear(); location.reload(); }
+});
+</script>
+</body>
+</html>
